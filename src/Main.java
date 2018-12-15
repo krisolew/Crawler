@@ -2,5 +2,8 @@ public class Main {
     public static void main(String[] args) {
         Spider spider = new Spider();
         spider.search("http://arstechnica.com/", "computer");
+
+
+        int a = 5;
     }
 }
