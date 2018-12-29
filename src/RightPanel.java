@@ -1,8 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 
 public class RightPanel extends JPanel{
 
