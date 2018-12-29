@@ -18,6 +18,7 @@ public class SpiderLeg {
             Connection connection = Jsoup.connect(url).userAgent("USER_AGENT");
             Document htmlDocument = connection.get();
             this.htmlDocument = htmlDocument;
+            System.out.println(htmlDocument.toString());
 
             System.out.println("Received web page at " + url);
 

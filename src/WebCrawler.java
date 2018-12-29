@@ -25,6 +25,7 @@ public class WebCrawler {
 
             if (marked.size() > 10)
                 return;
+            marked.add(currentUrl);
 
             URL url = null;
             BufferedReader br = null;
@@ -50,12 +51,9 @@ public class WebCrawler {
                 String w = matcher.group();
 
                 if (!marked.contains(w)){
-                    marked.add(w);
-                    System.out.println("Site added for crawling : " + w);
                     queue.add(w);
                 }
             }
-
         }
 
         for (String s : marked){
