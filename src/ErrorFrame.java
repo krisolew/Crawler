@@ -12,10 +12,11 @@ public class ErrorFrame extends JFrame {
         setResizable(false);
 
         text = new JLabel();
-        text.setFont(new Font("Arial",Font.PLAIN,24));
+        text.setFont(new Font("Arial",Font.PLAIN,28));
         text.setText(message);
         text.setHorizontalAlignment(0);
         text.setVerticalAlignment(0);
+        text.setForeground(new Color(255,0,0));
         add(text);
 
         pack();

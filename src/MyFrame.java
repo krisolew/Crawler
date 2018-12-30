@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 public class MyFrame extends JFrame {
 
     private LeftPanel leftPanel;
-    private RightPanel rightPanel;
+    RightPanel rightPanel;
     private JPanel searchPanel;
     private SearchButton button;
     private String [] adresses;
@@ -28,7 +28,7 @@ public class MyFrame extends JFrame {
         adresses[3] = "https://www.fis-ski.com/DB/alpine-skiing/cup-standings.html?sectorcode=AL&seasoncode=2019&cupcode=WC&disciplinecode=SG&gendercode=M";
         adresses[4] = "https://www.fis-ski.com/DB/alpine-skiing/cup-standings.html?sectorcode=AL&seasoncode=2019&cupcode=WC&disciplinecode=DH&gendercode=M";
 
-        leftPanel = new LeftPanel();
+        leftPanel = new LeftPanel(this);
         add(leftPanel,BorderLayout.WEST);
 
         rightPanel = new RightPanel();
@@ -63,6 +63,13 @@ public class MyFrame extends JFrame {
         searchPanel1.add(lButton);
 
         mButton = new SearchButton("Men") {
+
+            @Override
+            public void specialSettings() {
+                this.setBackground(new Color(255, 215, 0));
+                this.setForeground(new Color(0));
+            }
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 String [] adresses = getAdresses();
@@ -142,7 +149,7 @@ public class MyFrame extends JFrame {
         thread.start();
     }
 
-    public static void openErrorWindow(String message){
+    static void openErrorWindow(String message){
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -151,11 +158,11 @@ public class MyFrame extends JFrame {
         });
     }
 
-    public String[] getAdresses() {
+    String[] getAdresses() {
         return adresses;
     }
 
-    public void setAdresses(String [] adresses){
+    void setAdresses(String [] adresses){
         this.adresses = adresses;
     }
 }

@@ -11,8 +11,13 @@ public abstract class SearchButton extends JButton implements ActionListener {
         addActionListener(this);
         setBackground(new Color(0,0,128));
         setForeground(new Color(240, 240, 245));
+        specialSettings();
     }
 
     @Override
     public abstract void actionPerformed(ActionEvent e);
+
+    public void specialSettings(){
+
+    }
 }
