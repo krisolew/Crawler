@@ -26,7 +26,7 @@ public class SearchingAssistant implements Runnable {
         if (fisCrawler!=null)
         {
             try {
-                panel.setTextContent("Loading...");
+                panel.setTextContent(" Loading...");
                 fisCrawler.crawl();
 
                 List<String> names = fisCrawler.getNames();

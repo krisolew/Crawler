@@ -27,8 +27,6 @@ public class ImageLabel extends JLabel {
         } catch (IOException ex) {
             MyFrame.openErrorWindow("Not found picture");
         }
-        revalidate();
         repaint();
-
     }
 }

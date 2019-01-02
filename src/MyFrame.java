@@ -4,13 +4,14 @@ import java.awt.event.ActionEvent;
 
 public class MyFrame extends JFrame {
 
-    private LeftPanel leftPanel;
+    LeftPanel leftPanel;
     RightPanel rightPanel;
     private JPanel searchPanel;
     private SearchButton button;
     private String [] adresses;
     private SearchButton lButton;
     private SearchButton mButton;
+    private boolean man = true;
 
     public MyFrame(){
         super("Alpine Skiing Informator");
@@ -53,11 +54,12 @@ public class MyFrame extends JFrame {
                 mButton.setBackground(new Color(0,0,128));
                 mButton.setForeground(new Color(255,255,255));
 
-                leftPanel.iPanel.replaceImage("img/shiffrin.jpg");
+                leftPanel.iPanel.replaceImage("img/podium.jpg");
 
                 String adress = adresses[0];
                 FisPageCrawler clawler = new FisPageCrawler(adress);
                 crawlAndPrint(clawler);
+                man = false;
             }
         };
         searchPanel1.add(lButton);
@@ -82,11 +84,12 @@ public class MyFrame extends JFrame {
                 lButton.setBackground(new Color(0,0,128));
                 lButton.setForeground(new Color(255,255,255));
 
-                leftPanel.iPanel.replaceImage("img/marcel.jpg");
+                leftPanel.iPanel.replaceImage("img/kula.jpg");
 
                 String adress = adresses[0];
                 FisPageCrawler clawler = new FisPageCrawler(adress);
                 crawlAndPrint(clawler);
+                man = true;
             }
         };
         searchPanel1.add(mButton);
@@ -102,6 +105,8 @@ public class MyFrame extends JFrame {
                 String adress = adresses[1];
                 FisPageCrawler clawler = new FisPageCrawler(adress);
                 crawlAndPrint(clawler);
+                if (man) leftPanel.iPanel.replaceImage("img/marcel.jpg");
+                else leftPanel.iPanel.replaceImage("img/shiffrin.jpg");
             }
         };
         searchPanel1.add(button);
@@ -112,6 +117,8 @@ public class MyFrame extends JFrame {
                 String adress = adresses[2];
                 FisPageCrawler clawler = new FisPageCrawler(adress);
                 crawlAndPrint(clawler);
+                if (man) leftPanel.iPanel.replaceImage("img/ligety.jpg");
+                else leftPanel.iPanel.replaceImage("img/nina.jpg");
             }
         };
         searchPanel1.add(button);
@@ -122,6 +129,8 @@ public class MyFrame extends JFrame {
                 String adress = adresses[3];
                 FisPageCrawler clawler = new FisPageCrawler(adress);
                 crawlAndPrint(clawler);
+                if (man) leftPanel.iPanel.replaceImage("img/jansrud.jpg");
+                else leftPanel.iPanel.replaceImage("img/ilka.jpg");
             }
         };
         searchPanel1.add(button);
@@ -132,6 +141,8 @@ public class MyFrame extends JFrame {
                 String adress = adresses[4];
                 FisPageCrawler clawler = new FisPageCrawler(adress);
                 crawlAndPrint(clawler);
+                if (man) leftPanel.iPanel.replaceImage("img/bode.jpg");
+                else leftPanel.iPanel.replaceImage("img/vonn.jpg");
             }
         };
         searchPanel1.add(button);

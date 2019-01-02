@@ -15,13 +15,14 @@ public class LeftPanel extends JPanel{
     private JTextArea area;
 
     public LeftPanel(MyFrame frame){
+    
         this.frame = frame;
         setPreferredSize(new Dimension(500,600));
         setLayout(new FlowLayout());
         setFont(new Font("Arial", Font.PLAIN, 20));
         setBackground(new Color(240, 240, 245));
 
-        iPanel = new ImageLabel("img/marcel.jpg");
+        iPanel = new ImageLabel("img/start.jpg");
         add(iPanel);
 
         panel = new JPanel();
@@ -65,11 +66,12 @@ public class LeftPanel extends JPanel{
                         adresses[i] = adresses[i].replace(oldYear, newYear);
                     }
                 }
-                frame.setAdresses(adresses);
                 text.setText("");
                 area.setForeground(new Color(0,0,0));
                 area.setText("Year " + newYear );
+                frame.setAdresses(adresses);
                 frame.rightPanel.setTextContent("");
+                frame.leftPanel.iPanel.replaceImage("img/start.jpg");
             }
         };
         panel.add(button);
