@@ -1,8 +1,9 @@
+package Crawler;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class ErrorFrame extends JFrame {
-    JLabel text;
 
     public ErrorFrame(String message){
         super("Error");
@@ -11,7 +12,7 @@ public class ErrorFrame extends JFrame {
         setLayout(new BorderLayout());
         setResizable(false);
 
-        text = new JLabel();
+        JLabel text = new JLabel();
         text.setFont(new Font("Arial",Font.PLAIN,28));
         text.setText(message);
         text.setHorizontalAlignment(0);

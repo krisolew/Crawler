@@ -1,11 +1,12 @@
+package Crawler;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
 public class RightPanel extends JPanel{
 
-    JTextArea text;
-    JScrollPane scroll;
+    private JTextArea text;
 
     public RightPanel(){
         setLayout(new BorderLayout());
@@ -17,7 +18,7 @@ public class RightPanel extends JPanel{
         text.setBackground(new Color(240, 240, 245));
         text.setEditable(false);
 
-        scroll = new JScrollPane(text,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        JScrollPane scroll = new JScrollPane(text,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         add(scroll);
     }
 

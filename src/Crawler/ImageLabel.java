@@ -1,3 +1,5 @@
+package Crawler;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -8,6 +10,7 @@ import java.io.IOException;
 public class ImageLabel extends JLabel {
 
     private BufferedImage image;
+
     public ImageLabel(String path) {
         setPreferredSize(new Dimension(500,300));
         replaceImage(path);

@@ -1,3 +1,5 @@
+package Crawler;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -24,7 +26,8 @@ public class FisPageCrawler {
     public List <String> getNames(){
         return names;
     }
-    public List <String> getPoints(){
+
+    public List<String> getPoints() {
         return points;
     }
 
@@ -40,7 +43,7 @@ public class FisPageCrawler {
                 builder.append(pageContent);
             }
 
-            pageContent = builder.toString();
+             pageContent = builder.toString();
 
             Pattern pattern = Pattern.compile(namePattern);
             Matcher matcher = pattern.matcher(pageContent);

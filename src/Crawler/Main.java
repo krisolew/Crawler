@@ -1,3 +1,5 @@
+package Crawler;
+
 import java.awt.*;
 
 public class Main {

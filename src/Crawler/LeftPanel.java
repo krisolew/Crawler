@@ -1,3 +1,5 @@
+package Crawler;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -6,12 +8,9 @@ import java.util.regex.Pattern;
 
 public class LeftPanel extends JPanel{
 
-    MyFrame frame;
     ImageLabel iPanel;
+    private MyFrame frame;
     private JTextField text;
-    private JPanel panel;
-    private JLabel label;
-    private JButton button;
     private JTextArea area;
 
     public LeftPanel(MyFrame frame){
@@ -25,12 +24,12 @@ public class LeftPanel extends JPanel{
         iPanel = new ImageLabel("img/start.jpg");
         add(iPanel);
 
-        panel = new JPanel();
+        JPanel panel = new JPanel();
         panel.setPreferredSize(new Dimension(500,255));
         panel.setBackground(new Color(240, 240, 245));
         panel.setLayout(new FlowLayout());
 
-        label = new JLabel();
+        JLabel label = new JLabel();
         label.setText("Select year:");
         label.setFont(new Font("Arial", Font.PLAIN, 20));
         label.setPreferredSize(new Dimension(350,30));
@@ -43,7 +42,7 @@ public class LeftPanel extends JPanel{
         text.setFont(new Font("Arial", Font.PLAIN, 20));
         panel.add(text);
 
-        button = new SearchButton("Save") {
+        JButton button = new SearchButton("Save") {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String [] adresses = frame.getAdresses();
@@ -88,13 +87,5 @@ public class LeftPanel extends JPanel{
 
     void setAreaText(String text){
         area.setText(text);
-    }
-
-    private void crawlAndPrint() {
-        setAreaText("Loading...");
-        Crawler crawler = new Crawler();
-        Thread thread = new Thread(new SearchingAssistant(crawler,text.getText(),"https://www.fis-ski.com/",this));
-        thread.start();
-        area.setEditable(true);
     }
 }

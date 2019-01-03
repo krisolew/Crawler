@@ -1,17 +1,22 @@
+package Crawler;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MyFrame extends JFrame {
 
     LeftPanel leftPanel;
     RightPanel rightPanel;
-    private JPanel searchPanel;
     private SearchButton button;
     private String [] adresses;
     private SearchButton lButton;
     private SearchButton mButton;
     private boolean man = true;
+    private ExecutorService executor;
 
     public MyFrame(){
         super("Alpine Skiing Informator");
@@ -23,11 +28,22 @@ public class MyFrame extends JFrame {
         setIconImage(icon.getImage());
 
         adresses = new String[5];
-        adresses[0] = "https://www.fis-ski.com/DB/alpine-skiing/cup-standings.html?sectorcode=AL&seasoncode=2019&cupcode=WC&disciplinecode=ALL&gendercode=M";
-        adresses[1] = "https://www.fis-ski.com/DB/alpine-skiing/cup-standings.html?sectorcode=AL&seasoncode=2019&cupcode=WC&disciplinecode=SL&gendercode=M";
-        adresses[2] = "https://www.fis-ski.com/DB/alpine-skiing/cup-standings.html?sectorcode=AL&seasoncode=2019&cupcode=WC&disciplinecode=GS&gendercode=M";
-        adresses[3] = "https://www.fis-ski.com/DB/alpine-skiing/cup-standings.html?sectorcode=AL&seasoncode=2019&cupcode=WC&disciplinecode=SG&gendercode=M";
-        adresses[4] = "https://www.fis-ski.com/DB/alpine-skiing/cup-standings.html?sectorcode=AL&seasoncode=2019&cupcode=WC&disciplinecode=DH&gendercode=M";
+        try (BufferedReader reader = new BufferedReader(new FileReader("adresses.txt"))){
+            int i = 0;
+            String line;
+
+            while ( (line = reader.readLine()) != null ) {
+                adresses[i] = line;
+                i++;
+            }
+            if (i!=5) throw new IOException();
+        } catch (FileNotFoundException ex){
+            MyFrame.openErrorWindow("No file with adresses");
+        } catch (IOException ex){
+            MyFrame.openErrorWindow("To less adresses");
+        }
+
+        executor = Executors.newSingleThreadExecutor();
 
         leftPanel = new LeftPanel(this);
         add(leftPanel,BorderLayout.WEST);
@@ -35,7 +51,7 @@ public class MyFrame extends JFrame {
         rightPanel = new RightPanel();
         add(rightPanel,BorderLayout.EAST);
 
-        searchPanel = new JPanel();
+        JPanel searchPanel = new JPanel();
         searchPanel.setLayout(new BorderLayout());
 
         JPanel searchPanel1 = new JPanel();
@@ -157,7 +173,7 @@ public class MyFrame extends JFrame {
 
     private void crawlAndPrint(FisPageCrawler crawler) {
         Thread thread = new Thread(new SearchingAssistant(rightPanel,crawler));
-        thread.start();
+        executor.submit(thread);
     }
 
     static void openErrorWindow(String message){
