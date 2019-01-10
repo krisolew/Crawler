@@ -1,4 +1,7 @@
-package Crawler;
+package Crawler.GUI;
+
+import Crawler.FisPageCrawler;
+import Crawler.SearchingAssistant;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,9 +41,9 @@ public class MyFrame extends JFrame {
             }
             if (i!=5) throw new IOException();
         } catch (FileNotFoundException ex){
-            MyFrame.openErrorWindow("No file with adresses");
+            openErrorWindow("No file with adresses");
         } catch (IOException ex){
-            MyFrame.openErrorWindow("To less adresses");
+            openErrorWindow("To less adresses");
         }
 
         executor = Executors.newSingleThreadExecutor();
@@ -70,7 +73,7 @@ public class MyFrame extends JFrame {
                 mButton.setBackground(new Color(0,0,128));
                 mButton.setForeground(new Color(255,255,255));
 
-                leftPanel.iPanel.replaceImage("img/podium.jpg");
+                leftPanel.replaceImage("img/podium.jpg");
                 leftPanel.setAreaText("Overall");
 
                 FisPageCrawler clawler = new FisPageCrawler(adresses[0]);
@@ -100,7 +103,7 @@ public class MyFrame extends JFrame {
                 lButton.setBackground(new Color(0,0,128));
                 lButton.setForeground(new Color(255,255,255));
 
-                leftPanel.iPanel.replaceImage("img/kula.jpg");
+                leftPanel.replaceImage("img/kula.jpg");
                 leftPanel.setAreaText("Overall");
 
                 FisPageCrawler clawler = new FisPageCrawler(adresses[0]);
@@ -120,8 +123,8 @@ public class MyFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 FisPageCrawler clawler = new FisPageCrawler(adresses[1]);
                 crawlAndPrint(clawler);
-                if (man) leftPanel.iPanel.replaceImage("img/marcel.jpg");
-                else leftPanel.iPanel.replaceImage("img/shiffrin.jpg");
+                if (man) leftPanel.replaceImage("img/marcel.jpg");
+                else leftPanel.replaceImage("img/shiffrin.jpg");
                 leftPanel.setAreaText("Slalom");
             }
         };
@@ -132,8 +135,8 @@ public class MyFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 FisPageCrawler clawler = new FisPageCrawler(adresses[2]);
                 crawlAndPrint(clawler);
-                if (man) leftPanel.iPanel.replaceImage("img/ligety.jpg");
-                else leftPanel.iPanel.replaceImage("img/nina.jpg");
+                if (man) leftPanel.replaceImage("img/ligety.jpg");
+                else leftPanel.replaceImage("img/nina.jpg");
                 leftPanel.setAreaText("Gigant Slalom");
             }
         };
@@ -144,8 +147,8 @@ public class MyFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 FisPageCrawler clawler = new FisPageCrawler(adresses[3]);
                 crawlAndPrint(clawler);
-                if (man) leftPanel.iPanel.replaceImage("img/jansrud.jpg");
-                else leftPanel.iPanel.replaceImage("img/ilka.jpg");
+                if (man) leftPanel.replaceImage("img/jansrud.jpg");
+                else leftPanel.replaceImage("img/ilka.jpg");
                 leftPanel.setAreaText("Super Gigant");
             }
         };
@@ -156,8 +159,8 @@ public class MyFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 FisPageCrawler clawler = new FisPageCrawler(adresses[4]);
                 crawlAndPrint(clawler);
-                if (man) leftPanel.iPanel.replaceImage("img/bode.jpg");
-                else leftPanel.iPanel.replaceImage("img/vonn.jpg");
+                if (man) leftPanel.replaceImage("img/bode.jpg");
+                else leftPanel.replaceImage("img/vonn.jpg");
                 leftPanel.setAreaText("Downhill");
             }
         };
@@ -176,11 +179,11 @@ public class MyFrame extends JFrame {
         executor.submit(thread);
     }
 
-    public void addThreadToExecutor(Thread thread){
+    void addThreadToExecutor(Thread thread){
         executor.submit(thread);
     }
 
-    static void openErrorWindow(String message){
+    public static void openErrorWindow(String message){
         EventQueue.invokeLater(new Thread( () -> new ErrorFrame(message)));
     }
 

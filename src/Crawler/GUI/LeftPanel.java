@@ -1,4 +1,4 @@
-package Crawler;
+package Crawler.GUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,12 +12,12 @@ import java.util.regex.Pattern;
 
 public class LeftPanel extends JPanel implements ItemListener {
 
-    ImageLabel iPanel;
+    private ImageLabel iPanel;
     private MyFrame frame;
     private JTextArea area;
     private JComboBox<String> comboBox;
 
-    public LeftPanel(MyFrame frame){
+    LeftPanel(MyFrame frame){
     
         this.frame = frame;
         setPreferredSize(new Dimension(500,600));
@@ -59,7 +59,7 @@ public class LeftPanel extends JPanel implements ItemListener {
 
         area = new JTextArea();
         area.setEditable(false);
-        area.setBackground(new Color(240, 245, 245));
+        area.setBackground(new Color(240, 240, 245));
         area.setFont(new Font("Arial", Font.PLAIN, 17));
         area.setPreferredSize(new Dimension(350,50));
         panel.add(area);
@@ -69,6 +69,10 @@ public class LeftPanel extends JPanel implements ItemListener {
 
     void setAreaText(String text){
         area.setText(text);
+    }
+
+    void replaceImage(String path){
+        iPanel.replaceImage(path);
     }
 
     public void itemStateChanged(ItemEvent e) {

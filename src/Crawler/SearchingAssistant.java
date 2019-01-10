@@ -1,5 +1,8 @@
 package Crawler;
 
+import Crawler.GUI.MyFrame;
+import Crawler.GUI.RightPanel;
+
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;

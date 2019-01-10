@@ -1,4 +1,6 @@
-package Crawler;
+package Crawler.GUI;
+
+import Crawler.SkierData;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,12 +10,12 @@ public class RightPanel extends JPanel{
 
     private JTextArea text;
 
-    public RightPanel(){
+    RightPanel(){
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(500,600));
 
         text = new JTextArea();
-        text.setFont(new Font("Arial", 0, 20));
+        text.setFont(new Font("Arial", Font.PLAIN, 20));
         text.setTabSize(4);
         text.setBackground(new Color(240, 240, 245));
         text.setEditable(false);
@@ -32,7 +34,9 @@ public class RightPanel extends JPanel{
         while (!skiers.isEmpty()) {
             SkierData skier = skiers.remove(0);
             if ( skier.getPoints().equals("---") ) break;
-            builder.append(i + "\t" + skier.toString());
+            builder.append(i);
+            builder.append("\t");
+            builder.append(skier.toString());
             i++;
         }
 

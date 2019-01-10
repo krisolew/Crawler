@@ -1,7 +1,7 @@
 package Crawler;
 
 public class SpecialInteager {
-    Integer i;
+    private Integer i;
 
     public SpecialInteager(int i){
         this.i = i;

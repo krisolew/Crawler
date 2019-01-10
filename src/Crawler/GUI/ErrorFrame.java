@@ -1,11 +1,11 @@
-package Crawler;
+package Crawler.GUI;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class ErrorFrame extends JFrame {
 
-    public ErrorFrame(String message){
+    ErrorFrame(String message){
         super("Error");
         setPreferredSize(new Dimension(600,300));
         setLocation(650,350);
