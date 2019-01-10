@@ -13,14 +13,17 @@ public class FisPageCrawler {
     private String adress;
     private List <String> names;
     private List <String> points;
+    private List <String> countries;
     private String pageContent;
     private String namePattern = "<div class=\"g-xs-10 g-sm-9 g-md-4 g-lg-4 justify-left bold align-xs-top\">([^<]*)<";
     private String pointsPattern = "<div class=\"pl-xs-1 pl-sm-1 g-xs-10 g-sm-7 g-md-15 g-lg-12 justify-right bold\">([^<]*)<";
+    private String countryPattern = "<span class=\"country__name-short\">(\\w\\w\\w)<";
 
     public FisPageCrawler(String adress){
         this.adress = adress;
         names = new LinkedList<>();
         points = new LinkedList<>();
+        countries = new LinkedList<>();
     }
 
     public List <String> getNames(){
@@ -31,8 +34,12 @@ public class FisPageCrawler {
         return points;
     }
 
+    public List<String> getCountries() {
+        return countries;
+    }
+
     public void crawl() throws IOException{
-        URL url = null;
+        URL url;
         BufferedReader reader = null;
         try {
             url = new URL(adress);
@@ -43,7 +50,7 @@ public class FisPageCrawler {
                 builder.append(pageContent);
             }
 
-             pageContent = builder.toString();
+            pageContent = builder.toString();
 
             Pattern pattern = Pattern.compile(namePattern);
             Matcher matcher = pattern.matcher(pageContent);
@@ -60,6 +67,15 @@ public class FisPageCrawler {
                 String w = matcher.group(1);
                 points.add(w);
             }
+
+            pattern = Pattern.compile(countryPattern);
+            matcher = pattern.matcher(pageContent);
+
+            while (matcher.find()){
+                String w = matcher.group(1);
+                countries.add(w);
+            }
+
         } finally {
             if (reader != null) {
                 reader.close();

@@ -54,8 +54,8 @@ public class MyFrame extends JFrame {
         JPanel searchPanel = new JPanel();
         searchPanel.setLayout(new BorderLayout());
 
-        JPanel searchPanel1 = new JPanel();
-        searchPanel1.setLayout(new GridLayout());
+        JPanel searchRow = new JPanel();
+        searchRow.setLayout(new GridLayout());
 
         lButton = new SearchButton("Ladies") {
             @Override
@@ -71,14 +71,14 @@ public class MyFrame extends JFrame {
                 mButton.setForeground(new Color(255,255,255));
 
                 leftPanel.iPanel.replaceImage("img/podium.jpg");
+                leftPanel.setAreaText("Overall");
 
-                String adress = adresses[0];
-                FisPageCrawler clawler = new FisPageCrawler(adress);
+                FisPageCrawler clawler = new FisPageCrawler(adresses[0]);
                 crawlAndPrint(clawler);
                 man = false;
             }
         };
-        searchPanel1.add(lButton);
+        searchRow.add(lButton);
 
         mButton = new SearchButton("Men") {
 
@@ -101,68 +101,68 @@ public class MyFrame extends JFrame {
                 lButton.setForeground(new Color(255,255,255));
 
                 leftPanel.iPanel.replaceImage("img/kula.jpg");
+                leftPanel.setAreaText("Overall");
 
-                String adress = adresses[0];
-                FisPageCrawler clawler = new FisPageCrawler(adress);
+                FisPageCrawler clawler = new FisPageCrawler(adresses[0]);
                 crawlAndPrint(clawler);
                 man = true;
             }
         };
-        searchPanel1.add(mButton);
+        searchRow.add(mButton);
 
-        searchPanel.add(searchPanel1,BorderLayout.PAGE_START);
+        searchPanel.add(searchRow,BorderLayout.PAGE_START);
 
-        searchPanel1 = new JPanel();
-        searchPanel1.setLayout(new GridLayout());
+        searchRow = new JPanel();
+        searchRow.setLayout(new GridLayout());
 
         button = new SearchButton("Slalom") {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String adress = adresses[1];
-                FisPageCrawler clawler = new FisPageCrawler(adress);
+                FisPageCrawler clawler = new FisPageCrawler(adresses[1]);
                 crawlAndPrint(clawler);
                 if (man) leftPanel.iPanel.replaceImage("img/marcel.jpg");
                 else leftPanel.iPanel.replaceImage("img/shiffrin.jpg");
+                leftPanel.setAreaText("Slalom");
             }
         };
-        searchPanel1.add(button);
+        searchRow.add(button);
 
         button = new SearchButton("Gigant Slalom") {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String adress = adresses[2];
-                FisPageCrawler clawler = new FisPageCrawler(adress);
+                FisPageCrawler clawler = new FisPageCrawler(adresses[2]);
                 crawlAndPrint(clawler);
                 if (man) leftPanel.iPanel.replaceImage("img/ligety.jpg");
                 else leftPanel.iPanel.replaceImage("img/nina.jpg");
+                leftPanel.setAreaText("Gigant Slalom");
             }
         };
-        searchPanel1.add(button);
+        searchRow.add(button);
 
         button = new SearchButton("Super Gigant") {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String adress = adresses[3];
-                FisPageCrawler clawler = new FisPageCrawler(adress);
+                FisPageCrawler clawler = new FisPageCrawler(adresses[3]);
                 crawlAndPrint(clawler);
                 if (man) leftPanel.iPanel.replaceImage("img/jansrud.jpg");
                 else leftPanel.iPanel.replaceImage("img/ilka.jpg");
+                leftPanel.setAreaText("Super Gigant");
             }
         };
-        searchPanel1.add(button);
+        searchRow.add(button);
 
         button = new SearchButton("Downhill") {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String adress = adresses[4];
-                FisPageCrawler clawler = new FisPageCrawler(adress);
+                FisPageCrawler clawler = new FisPageCrawler(adresses[4]);
                 crawlAndPrint(clawler);
                 if (man) leftPanel.iPanel.replaceImage("img/bode.jpg");
                 else leftPanel.iPanel.replaceImage("img/vonn.jpg");
+                leftPanel.setAreaText("Downhill");
             }
         };
-        searchPanel1.add(button);
-        searchPanel.add(searchPanel1,BorderLayout.PAGE_END);
+        searchRow.add(button);
+        searchPanel.add(searchRow);
 
         add(searchPanel,BorderLayout.PAGE_END);
 
@@ -176,13 +176,12 @@ public class MyFrame extends JFrame {
         executor.submit(thread);
     }
 
+    public void addThreadToExecutor(Thread thread){
+        executor.submit(thread);
+    }
+
     static void openErrorWindow(String message){
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new ErrorFrame(message);
-            }
-        });
+        EventQueue.invokeLater(new Thread( () -> new ErrorFrame(message)));
     }
 
     String[] getAdresses() {

@@ -22,19 +22,17 @@ public class RightPanel extends JPanel{
         add(scroll);
     }
 
-    public void setTextContent(List <String> names, List <String> points){
+    public void setTextContent(List <SkierData> skiers){
         String name;
-        String point;
         StringBuilder builder = new StringBuilder();
-        int i = 1;
+        int i=1;
 
-        builder.append("Nr\t" + "Pkt\t" + "Nazwisko i imie\n" );
+        builder.append("Nr\t" + "Pkt   " + "Country\t" + "Name\n" );
 
-        while (!names.isEmpty()) {
-            name = names.remove(0);
-            point = points.remove(0);
-            if ( point.equals("---") ) break;
-            builder.append(i + ".\t" + point.trim() + "\t" + name.trim() + "\n");
+        while (!skiers.isEmpty()) {
+            SkierData skier = skiers.remove(0);
+            if ( skier.getPoints().equals("---") ) break;
+            builder.append(i + "\t" + skier.toString());
             i++;
         }
 
@@ -42,7 +40,7 @@ public class RightPanel extends JPanel{
         text.setText(name);
     }
 
-    public void setTextContent ( String content ){
+    public void setTextContent(String content){
         text.setText(content);
     }
 }
