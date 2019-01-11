@@ -14,9 +14,6 @@ public class FisPageCrawler {
     private List <String> names;
     private List <String> points;
     private List <String> countries;
-    private String namePattern = "<div class=\"g-xs-10 g-sm-9 g-md-4 g-lg-4 justify-left bold align-xs-top\">([^<]*)<";
-    private String pointsPattern = "<div class=\"pl-xs-1 pl-sm-1 g-xs-10 g-sm-7 g-md-15 g-lg-12 justify-right bold\">([^<]*)<";
-    private String countryPattern = "<span class=\"country__name-short\">(\\w\\w\\w)<";
 
     public FisPageCrawler(String adress){
         this.adress = adress;
@@ -49,7 +46,7 @@ public class FisPageCrawler {
             }
             pageContent = builder.toString();
 
-            Pattern pattern = Pattern.compile(namePattern);
+            Pattern pattern = Pattern.compile("<div class=\"g-xs-10 g-sm-9 g-md-4 g-lg-4 justify-left bold align-xs-top\">([^<]*)<");
             Matcher matcher = pattern.matcher(pageContent);
 
             while (matcher.find()){
@@ -57,7 +54,7 @@ public class FisPageCrawler {
                 names.add(w);
             }
 
-            pattern = Pattern.compile(pointsPattern);
+            pattern = Pattern.compile("<div class=\"pl-xs-1 pl-sm-1 g-xs-10 g-sm-7 g-md-15 g-lg-12 justify-right bold\">([^<]*)<");
             matcher = pattern.matcher(pageContent);
 
             while (matcher.find()){
@@ -65,7 +62,7 @@ public class FisPageCrawler {
                 points.add(w);
             }
 
-            pattern = Pattern.compile(countryPattern);
+            pattern = Pattern.compile("<span class=\"country__name-short\">(\\w\\w\\w)<");
             matcher = pattern.matcher(pageContent);
 
             while (matcher.find()){
