@@ -1,7 +1,6 @@
 package Crawler;
 
 import Crawler.GUI.MyFrame;
-
 import java.awt.*;
 
 public class Main {

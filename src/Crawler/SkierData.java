@@ -1,21 +1,20 @@
 package Crawler;
 
+import Crawler.GUI.SpecialInteager;
+
 public class SkierData {
+
     private String name;
-    private String points;
+    private SpecialInteager points;
     private String country;
 
-    public SkierData(String name, String points, String country) {
+    SkierData(String name, SpecialInteager points, String country) {
         this.name = name;
         this.points = points;
         this.country = country;
     }
 
     public String toString(){
-        return points.trim() + "\t" + country + "\t" + name.trim() + "\n";
-    }
-
-    public String getPoints(){
-        return points;
+        return points + "\t" + country + "\t" + name.trim() + "\n";
     }
 }

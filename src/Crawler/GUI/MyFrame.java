@@ -6,20 +6,21 @@ import Crawler.SearchingAssistant;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.io.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class MyFrame extends JFrame {
 
     LeftPanel leftPanel;
-    RightPanel rightPanel;
+    public RightPanel rightPanel;
     private SearchButton button;
     private String [] adresses;
     private SearchButton lButton;
     private SearchButton mButton;
     private boolean man = true;
     private ExecutorService executor;
+    private Future future = null;
 
     public MyFrame(){
         super("Alpine Skiing Informator");
@@ -31,20 +32,11 @@ public class MyFrame extends JFrame {
         setIconImage(icon.getImage());
 
         adresses = new String[5];
-        try (BufferedReader reader = new BufferedReader(new FileReader("adresses.txt"))){
-            int i = 0;
-            String line;
-
-            while ( (line = reader.readLine()) != null ) {
-                adresses[i] = line;
-                i++;
-            }
-            if (i!=5) throw new IOException();
-        } catch (FileNotFoundException ex){
-            openErrorWindow("No file with adresses");
-        } catch (IOException ex){
-            openErrorWindow("To less adresses");
-        }
+        adresses[0] = "https://www.fis-ski.com/DB/alpine-skiing/cup-standings.html?sectorcode=AL&seasoncode=2019&cupcode=WC&disciplinecode=ALL&gendercode=M";
+        adresses[1] = "https://www.fis-ski.com/DB/alpine-skiing/cup-standings.html?sectorcode=AL&seasoncode=2019&cupcode=WC&disciplinecode=SL&gendercode=M";
+        adresses[2] = "https://www.fis-ski.com/DB/alpine-skiing/cup-standings.html?sectorcode=AL&seasoncode=2019&cupcode=WC&disciplinecode=GS&gendercode=M";
+        adresses[3] = "https://www.fis-ski.com/DB/alpine-skiing/cup-standings.html?sectorcode=AL&seasoncode=2019&cupcode=WC&disciplinecode=SG&gendercode=M";
+        adresses[4] = "https://www.fis-ski.com/DB/alpine-skiing/cup-standings.html?sectorcode=AL&seasoncode=2019&cupcode=WC&disciplinecode=DH&gendercode=M";
 
         executor = Executors.newSingleThreadExecutor();
 
@@ -68,17 +60,17 @@ public class MyFrame extends JFrame {
                     adresses[i] = adresses[i].replace("=M","=L");
                 }
                 setAdresses(adresses);
+
                 this.setBackground(new Color(255, 215, 0));
                 this.setForeground(new Color(0));
                 mButton.setBackground(new Color(0,0,128));
                 mButton.setForeground(new Color(255,255,255));
-
                 leftPanel.replaceImage("img/podium.jpg");
                 leftPanel.setAreaText("Overall");
+                man = false;
 
                 FisPageCrawler clawler = new FisPageCrawler(adresses[0]);
-                crawlAndPrint(clawler);
-                man = false;
+                addCrawlerToExecutor(clawler);
             }
         };
         searchRow.add(lButton);
@@ -98,17 +90,17 @@ public class MyFrame extends JFrame {
                     adresses[i] = adresses[i].replace("=L","=M");
                 }
                 setAdresses(adresses);
+                
                 this.setBackground(new Color(255, 215, 0));
                 this.setForeground(new Color(0));
                 lButton.setBackground(new Color(0,0,128));
                 lButton.setForeground(new Color(255,255,255));
-
                 leftPanel.replaceImage("img/kula.jpg");
                 leftPanel.setAreaText("Overall");
+                man = true;
 
                 FisPageCrawler clawler = new FisPageCrawler(adresses[0]);
-                crawlAndPrint(clawler);
-                man = true;
+                addCrawlerToExecutor(clawler);
             }
         };
         searchRow.add(mButton);
@@ -121,11 +113,11 @@ public class MyFrame extends JFrame {
         button = new SearchButton("Slalom") {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FisPageCrawler clawler = new FisPageCrawler(adresses[1]);
-                crawlAndPrint(clawler);
+                leftPanel.setAreaText("Slalom");
                 if (man) leftPanel.replaceImage("img/marcel.jpg");
                 else leftPanel.replaceImage("img/shiffrin.jpg");
-                leftPanel.setAreaText("Slalom");
+                FisPageCrawler clawler = new FisPageCrawler(adresses[1]);
+                addCrawlerToExecutor(clawler);
             }
         };
         searchRow.add(button);
@@ -133,11 +125,11 @@ public class MyFrame extends JFrame {
         button = new SearchButton("Gigant Slalom") {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FisPageCrawler clawler = new FisPageCrawler(adresses[2]);
-                crawlAndPrint(clawler);
+                leftPanel.setAreaText("Gigant Slalom");
                 if (man) leftPanel.replaceImage("img/ligety.jpg");
                 else leftPanel.replaceImage("img/nina.jpg");
-                leftPanel.setAreaText("Gigant Slalom");
+                FisPageCrawler clawler = new FisPageCrawler(adresses[2]);
+                addCrawlerToExecutor(clawler);
             }
         };
         searchRow.add(button);
@@ -145,11 +137,11 @@ public class MyFrame extends JFrame {
         button = new SearchButton("Super Gigant") {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FisPageCrawler clawler = new FisPageCrawler(adresses[3]);
-                crawlAndPrint(clawler);
+                leftPanel.setAreaText("Super Gigant");
                 if (man) leftPanel.replaceImage("img/jansrud.jpg");
                 else leftPanel.replaceImage("img/ilka.jpg");
-                leftPanel.setAreaText("Super Gigant");
+                FisPageCrawler clawler = new FisPageCrawler(adresses[3]);
+                addCrawlerToExecutor(clawler);
             }
         };
         searchRow.add(button);
@@ -157,11 +149,11 @@ public class MyFrame extends JFrame {
         button = new SearchButton("Downhill") {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FisPageCrawler clawler = new FisPageCrawler(adresses[4]);
-                crawlAndPrint(clawler);
+                leftPanel.setAreaText("Downhill");
                 if (man) leftPanel.replaceImage("img/bode.jpg");
                 else leftPanel.replaceImage("img/vonn.jpg");
-                leftPanel.setAreaText("Downhill");
+                FisPageCrawler clawler = new FisPageCrawler(adresses[4]);
+                addCrawlerToExecutor(clawler);
             }
         };
         searchRow.add(button);
@@ -171,20 +163,7 @@ public class MyFrame extends JFrame {
 
         pack();
         setVisible(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    }
-
-    private void crawlAndPrint(FisPageCrawler crawler) {
-        Thread thread = new Thread(new SearchingAssistant(rightPanel,crawler));
-        executor.submit(thread);
-    }
-
-    void addThreadToExecutor(Thread thread){
-        executor.submit(thread);
-    }
-
-    public static void openErrorWindow(String message){
-        EventQueue.invokeLater(new Thread( () -> new ErrorFrame(message)));
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     String[] getAdresses() {
@@ -193,5 +172,24 @@ public class MyFrame extends JFrame {
 
     void setAdresses(String [] adresses){
         this.adresses = adresses;
+    }
+
+    private void addCrawlerToExecutor(FisPageCrawler crawler) {
+        Thread thread = new Thread(new SearchingAssistant(this,crawler));
+        if (future != null && !future.isDone()) future.cancel(true);
+        future = executor.submit(thread);
+    }
+
+    void addThreadToExecutor(Thread thread){
+        executor.submit(thread);
+    }
+
+    public void resetSettings(){
+        leftPanel.resetSettings();
+        rightPanel.setTextContent("");
+    }
+
+    public static void openErrorWindow(String message){
+        EventQueue.invokeLater(new Thread( () -> new ErrorFrame(message)));
     }
 }

@@ -37,7 +37,7 @@ public class LeftPanel extends JPanel implements ItemListener {
         label.setText("Select season:");
         label.setFont(new Font("Arial", Font.PLAIN, 20));
         label.setPreferredSize(new Dimension(350,30));
-        label.setHorizontalAlignment(0);
+        label.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(label);
 
         Integer year = calculateCurrentYear();
@@ -84,9 +84,7 @@ public class LeftPanel extends JPanel implements ItemListener {
             newYear = yearMatcher.group(2);
 
         setYear(newYear);
-
-        area.setText("");
-        frame.leftPanel.iPanel.replaceImage("img/start.jpg");
+        resetSettings();
 
         Thread thread = new Thread( () -> frame.rightPanel.setTextContent(""));
         frame.addThreadToExecutor(thread);
@@ -115,5 +113,10 @@ public class LeftPanel extends JPanel implements ItemListener {
             }
         }
         frame.setAdresses(adresses);
+    }
+
+    void resetSettings(){
+        setAreaText("");
+        replaceImage("img/start.jpg");
     }
 }

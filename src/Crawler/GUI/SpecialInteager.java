@@ -1,9 +1,10 @@
-package Crawler;
+package Crawler.GUI;
 
 public class SpecialInteager {
+
     private Integer i;
 
-    public SpecialInteager(int i){
+    SpecialInteager(int i){
         this.i = i;
     }
 
@@ -12,7 +13,7 @@ public class SpecialInteager {
     }
 
     public String toString(){
-        int numOfDigits=3;
+        int numOfDigits=4;
         int tmp = i;
         while (tmp > 0){
             numOfDigits--;
@@ -23,6 +24,10 @@ public class SpecialInteager {
             space = space + " ";
             numOfDigits--;
         }
-        return space + i;
+        return space + i + space;
+    }
+
+    void increment(){
+        i++;
     }
 }
