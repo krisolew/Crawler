@@ -10,10 +10,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-public class MyFrame extends JFrame {
+public class MainFrame extends JFrame {
 
-    LeftPanel leftPanel;
     public RightPanel rightPanel;
+    private LeftPanel leftPanel;
     private SearchButton button;
     private String [] adresses;
     private SearchButton lButton;
@@ -22,7 +22,7 @@ public class MyFrame extends JFrame {
     private ExecutorService executor;
     private Future future = null;
 
-    public MyFrame(){
+    public MainFrame(){
         super("Alpine Skiing Informator");
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(1000,600));
@@ -185,8 +185,9 @@ public class MyFrame extends JFrame {
     }
 
     public void resetSettings(){
+
         leftPanel.resetSettings();
-        rightPanel.setTextContent("");
+        rightPanel.setTextContent();
     }
 
     public static void openErrorWindow(String message){

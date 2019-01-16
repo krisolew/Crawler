@@ -9,10 +9,11 @@ import java.util.List;
 public class RightPanel extends JPanel{
 
     private JTextArea text;
+    private JScrollPane scroll;
 
     RightPanel(){
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(500,600));
+        setPreferredSize(new Dimension(494,600));
 
         text = new JTextArea();
         text.setFont(new Font( "Arial", Font.PLAIN, 19));
@@ -20,7 +21,7 @@ public class RightPanel extends JPanel{
         text.setBackground(new Color(240, 240, 245));
         text.setEditable(false);
 
-        JScrollPane scroll = new JScrollPane(text,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scroll = new JScrollPane(text,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         add(scroll);
     }
 
@@ -44,6 +45,11 @@ public class RightPanel extends JPanel{
     }
 
     public void setTextContent(String content){
+        scroll.updateUI();
         text.setText(content);
+    }
+
+    void setTextContent(){
+        text.setText("");
     }
 }

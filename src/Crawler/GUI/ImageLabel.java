@@ -28,7 +28,7 @@ public class ImageLabel extends JLabel {
         try {
             image = ImageIO.read(file);
         } catch (IOException ex) {
-            MyFrame.openErrorWindow("Picture not found");
+            MainFrame.openErrorWindow("Picture not found");
         }
         repaint();
     }

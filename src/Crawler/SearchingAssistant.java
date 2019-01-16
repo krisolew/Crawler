@@ -1,6 +1,6 @@
 package Crawler;
 
-import Crawler.GUI.MyFrame;
+import Crawler.GUI.MainFrame;
 import Crawler.GUI.SpecialInteager;
 
 import java.io.IOException;
@@ -9,10 +9,10 @@ import java.util.List;
 
 public class SearchingAssistant implements Runnable {
 
-    private MyFrame frame;
+    private MainFrame frame;
     private FisPageCrawler fisCrawler;
 
-    public SearchingAssistant(MyFrame frame, FisPageCrawler fisCrawler){
+    public SearchingAssistant(MainFrame frame, FisPageCrawler fisCrawler){
         this.frame = frame;
         this.fisCrawler = fisCrawler;
     }
@@ -37,7 +37,7 @@ public class SearchingAssistant implements Runnable {
             frame.rightPanel.setTextContent(skiers);
         }
         catch (IOException ex){
-            MyFrame.openErrorWindow("No internet connection");
+            MainFrame.openErrorWindow("No internet connection");
             frame.resetSettings();
         }
     }

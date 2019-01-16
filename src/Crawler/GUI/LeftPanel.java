@@ -13,11 +13,11 @@ import java.util.regex.Pattern;
 public class LeftPanel extends JPanel implements ItemListener {
 
     private ImageLabel iPanel;
-    private MyFrame frame;
+    private MainFrame frame;
     private JTextArea area;
     private JComboBox<String> comboBox;
 
-    LeftPanel(MyFrame frame){
+    LeftPanel(MainFrame frame){
     
         this.frame = frame;
         setPreferredSize(new Dimension(500,600));
@@ -86,7 +86,7 @@ public class LeftPanel extends JPanel implements ItemListener {
         setYear(newYear);
         resetSettings();
 
-        Thread thread = new Thread( () -> frame.rightPanel.setTextContent(""));
+        Thread thread = new Thread( () -> frame.rightPanel.setTextContent());
         frame.addThreadToExecutor(thread);
     }
 
