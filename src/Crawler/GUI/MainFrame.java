@@ -187,7 +187,7 @@ public class MainFrame extends JFrame {
     public void resetSettings(){
 
         leftPanel.resetSettings();
-        rightPanel.setTextContent();
+        rightPanel.setTextContent("");
     }
 
     public static void openErrorWindow(String message){

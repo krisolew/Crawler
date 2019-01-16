@@ -86,7 +86,7 @@ public class LeftPanel extends JPanel implements ItemListener {
         setYear(newYear);
         resetSettings();
 
-        Thread thread = new Thread( () -> frame.rightPanel.setTextContent());
+        Thread thread = new Thread( () -> frame.rightPanel.setTextContent(""));
         frame.addThreadToExecutor(thread);
     }
 

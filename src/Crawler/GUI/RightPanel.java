@@ -48,8 +48,4 @@ public class RightPanel extends JPanel{
         scroll.updateUI();
         text.setText(content);
     }
-
-    void setTextContent(){
-        text.setText("");
-    }
 }
