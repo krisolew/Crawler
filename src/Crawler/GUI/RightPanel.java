@@ -28,16 +28,16 @@ public class RightPanel extends JPanel{
     public void setTextContent(List <SkierData> skiers){
         String name;
         StringBuilder builder = new StringBuilder();
-        SpecialInteager i = new SpecialInteager(1);
+        int number = 1;
 
         builder.append("  Nr   " + "   Pkt  " + "    Country\t" + "\tName\n" );
 
         while (!skiers.isEmpty()) {
             SkierData skier = skiers.remove(0);
-            builder.append(i);
+            builder.append(formatNumber(number));
             builder.append("  ");
             builder.append(skier.toString());
-            i.increment();
+            number++;
         }
 
         name = builder.toString();
@@ -47,5 +47,20 @@ public class RightPanel extends JPanel{
     public void setTextContent(String content){
         scroll.updateUI();
         text.setText(content);
+    }
+
+    public static String formatNumber(int number){
+        int numOfDigits=4;
+        int tmp = number;
+        while (tmp > 0){
+            numOfDigits--;
+            tmp/=10;
+        }
+        String space="";
+        while (numOfDigits>0){
+            space = space + " ";
+            numOfDigits--;
+        }
+        return space + number + space;
     }
 }

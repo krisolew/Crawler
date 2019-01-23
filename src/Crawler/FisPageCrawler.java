@@ -11,6 +11,10 @@ import java.util.regex.Pattern;
 
 public class FisPageCrawler {
     private String adress;
+    private String pageContent;
+    private static String namePattern = "<div class=\"g-xs-10 g-sm-9 g-md-4 g-lg-4 justify-left bold align-xs-top\">([^<]*)<";
+    private static String countryPattern =  "<span class=\"country__name-short\">(\\w\\w\\w)<";
+    private static String pointsPattern = "<div class=\"pl-xs-1 pl-sm-1 g-xs-10 g-sm-7 g-md-15 g-lg-12 justify-right bold\">([^<]*)<";
     private List <String> names;
     private List <String> points;
     private List <String> countries;
@@ -39,36 +43,25 @@ public class FisPageCrawler {
 
         try ( BufferedReader reader = new BufferedReader(new InputStreamReader(url.openStream()))) {
             StringBuilder builder = new StringBuilder();
-            String pageContent;
+            String line;
 
-            while ( (pageContent = reader.readLine()) != null ){
-                builder.append(pageContent);
+            while ((line = reader.readLine()) != null) {
+                builder.append(line);
             }
             pageContent = builder.toString();
+            findInformations(namePattern,names);
+            findInformations(pointsPattern,points);
+            findInformations(countryPattern,countries);
+        }
+    }
 
-            Pattern pattern = Pattern.compile("<div class=\"g-xs-10 g-sm-9 g-md-4 g-lg-4 justify-left bold align-xs-top\">([^<]*)<");
-            Matcher matcher = pattern.matcher(pageContent);
+    private void findInformations(String classPattern, List<String> list){
+        Pattern pattern = Pattern.compile(classPattern);
+        Matcher matcher = pattern.matcher(pageContent);
 
-            while (matcher.find()){
-                String w = matcher.group(1);
-                names.add(w);
-            }
-
-            pattern = Pattern.compile("<div class=\"pl-xs-1 pl-sm-1 g-xs-10 g-sm-7 g-md-15 g-lg-12 justify-right bold\">([^<]*)<");
-            matcher = pattern.matcher(pageContent);
-
-            while (matcher.find()){
-                String w = matcher.group(1);
-                points.add(w);
-            }
-
-            pattern = Pattern.compile("<span class=\"country__name-short\">(\\w\\w\\w)<");
-            matcher = pattern.matcher(pageContent);
-
-            while (matcher.find()){
-                String w = matcher.group(1);
-                countries.add(w);
-            }
+        while (matcher.find()){
+            String w = matcher.group(1);
+            list.add(w);
         }
     }
 }

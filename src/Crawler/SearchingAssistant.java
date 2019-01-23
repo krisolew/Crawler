@@ -1,7 +1,6 @@
 package Crawler;
 
 import Crawler.GUI.MainFrame;
-import Crawler.GUI.SpecialInteager;
 
 import java.io.IOException;
 import java.util.LinkedList;
@@ -31,7 +30,7 @@ public class SearchingAssistant implements Runnable {
             while(!names.isEmpty() && !points.get(0).equals("---")){
                 String point = points.remove(0);
                 if (point.contains("'")) point = point.replace("'","");
-                skiers.add( new SkierData(names.remove(0), new SpecialInteager(point), countries.remove(0)));
+                skiers.add( new SkierData(names.remove(0), Integer.parseInt(point), countries.remove(0)));
             }
 
             frame.rightPanel.setTextContent(skiers);
