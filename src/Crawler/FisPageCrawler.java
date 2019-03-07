@@ -14,7 +14,7 @@ public class FisPageCrawler {
     private String pageContent;
     private static String namePattern = "<div class=\"g-xs-10 g-sm-9 g-md-4 g-lg-4 justify-left bold align-xs-top\">([^<]*)<";
     private static String countryPattern =  "<span class=\"country__name-short\">(\\w\\w\\w)<";
-    private static String pointsPattern = "<div class=\"pl-xs-1 pl-sm-1 g-xs-10 g-sm-7 g-md-15 g-lg-12 justify-right bold\">([^<]*)<";
+    private static String pointsPattern = "<div class=\"pl-xs-1 pl-sm-1 g-xs-10 g-sm-7 g-md-9 g-lg-8 justify-right bold\">([^<]*)<";
     private List <String> names;
     private List <String> points;
     private List <String> countries;
@@ -26,7 +26,7 @@ public class FisPageCrawler {
         countries = new LinkedList<>();
     }
 
-    List <String> getNames(){
+    List<String> getNames(){
         return names;
     }
 
