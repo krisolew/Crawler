@@ -1,5 +1,6 @@
 package Crawler.GUI;
 
+import Crawler.GUILogic.RightPanelLogic;
 import Crawler.SkierData;
 
 import javax.swing.*;
@@ -8,12 +9,15 @@ import java.util.List;
 
 public class RightPanel extends JPanel{
 
+    private RightPanelLogic logic;
     private JTextArea text;
     private JScrollPane scroll;
 
     RightPanel(){
         setLayout(new BorderLayout());
         setPreferredSize(new Dimension(494,600));
+
+        logic = new RightPanelLogic();
 
         text = new JTextArea();
         text.setFont(new Font( "Arial", Font.PLAIN, 19));
@@ -26,41 +30,11 @@ public class RightPanel extends JPanel{
     }
 
     public void setTextContent(List <SkierData> skiers){
-        String name;
-        StringBuilder builder = new StringBuilder();
-        int number = 1;
-
-        builder.append("  Nr   " + "   Pkt  " + "    Country\t" + "\tName\n" );
-
-        while (!skiers.isEmpty()) {
-            SkierData skier = skiers.remove(0);
-            builder.append(formatNumber(number));
-            builder.append("  ");
-            builder.append(skier.toString());
-            number++;
-        }
-
-        name = builder.toString();
-        text.setText(name);
+        text.setText(logic.getContentFromList(skiers));
     }
 
     public void setTextContent(String content){
         scroll.updateUI();
         text.setText(content);
-    }
-
-    public static String formatNumber(int number){
-        int numOfDigits=4;
-        int tmp = number;
-        while (tmp > 0){
-            numOfDigits--;
-            tmp/=10;
-        }
-        String space="";
-        while (numOfDigits>0){
-            space = space + " ";
-            numOfDigits--;
-        }
-        return space + number + space;
     }
 }

@@ -1,6 +1,6 @@
 package Crawler;
 
-import Crawler.GUI.RightPanel;
+import Crawler.GUILogic.RightPanelLogic;
 
 public class SkierData {
 
@@ -15,6 +15,6 @@ public class SkierData {
     }
 
     public String toString(){
-        return RightPanel.formatNumber(points) + "\t" + country + "\t" + name.trim() + "\n";
+        return RightPanelLogic.formatNumber(points) + "\t" + country + "\t" + name.trim() + "\n";
     }
 }
