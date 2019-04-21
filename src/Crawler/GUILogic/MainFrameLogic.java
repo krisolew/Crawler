@@ -1,5 +1,7 @@
 package Crawler.GUILogic;
 
+import Crawler.Enums.Gender;
+import Crawler.Enums.RaceType;
 import Crawler.FisPageCrawler;
 import Crawler.GUI.ErrorFrame;
 import Crawler.GUI.MainFrame;
@@ -69,45 +71,31 @@ public class MainFrameLogic {
         EventQueue.invokeLater(new Thread( () -> new ErrorFrame(message)));
     }
 
-    public SearchButton createLadiesButton()
+    public SearchButton createGenderButton(Gender gender)
     {
-        return new SearchButton("Ladies") {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                for (Map.Entry<RaceType, String> adress : adresses.entrySet()) {
-                    adresses.put(adress.getKey(), adress.getValue().replace("=M","=L") );
-                }
-
-                man = false;
-                frame.setGenderButtonOnClickProperties(this, man);
-                frame.leftPanel.setAreaText(RaceType.ALL.toString());
-                frame.leftPanel.replaceImage(femaleImages.get(RaceType.ALL));
-
-                FisPageCrawler crawler = new FisPageCrawler(adresses.get(RaceType.ALL));
-                addCrawlerToExecutor(crawler);
-            }
-        };
-    }
-
-    public SearchButton createManButton()
-    {
-        return new SearchButton("Men") {
-
+        return new SearchButton(gender.toString()) {
             @Override
             public void specialSettings() {
+                if (gender == Gender.MALE)
                 frame.setSpecialButtonSettings(this);
             }
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                String target = gender.getAnotherGenderFirstLetter();
+                String replacement = gender.getFirstLetter();
+
                 for (Map.Entry<RaceType, String> adress : adresses.entrySet()) {
-                    adresses.put(adress.getKey(), adress.getValue().replace("=L","=M") );
+                    adresses.put(adress.getKey(), adress.getValue().replace(target,replacement) );
                 }
 
-                man = true;
+                man = !man;
                 frame.setGenderButtonOnClickProperties(this, man);
                 frame.leftPanel.setAreaText(RaceType.ALL.toString());
-                frame.leftPanel.replaceImage(maleImages.get(RaceType.ALL));
+                if (man)
+                    frame.leftPanel.replaceImage(maleImages.get(RaceType.ALL));
+                else
+                    frame.leftPanel.replaceImage(femaleImages.get(RaceType.ALL));
 
                 FisPageCrawler crawler = new FisPageCrawler(adresses.get(RaceType.ALL));
                 addCrawlerToExecutor(crawler);

@@ -1,4 +1,4 @@
-package Crawler.GUILogic;
+package Crawler.Enums;
 
 public enum RaceType {
     ALL,

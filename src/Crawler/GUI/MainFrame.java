@@ -1,7 +1,8 @@
 package Crawler.GUI;
 
+import Crawler.Enums.Gender;
 import Crawler.GUILogic.MainFrameLogic;
-import Crawler.GUILogic.RaceType;
+import Crawler.Enums.RaceType;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +12,6 @@ public class MainFrame extends JFrame {
     public MainFrameLogic logic;
     public RightPanel rightPanel;
     public LeftPanel leftPanel;
-    private SearchButton button;
     private SearchButton lButton;
     private SearchButton mButton;
 
@@ -26,22 +26,25 @@ public class MainFrame extends JFrame {
 
         logic = new MainFrameLogic(this);
 
+        //display panels
         leftPanel = new LeftPanel(this);
         add(leftPanel,BorderLayout.WEST);
 
         rightPanel = new RightPanel();
         add(rightPanel,BorderLayout.EAST);
 
+        //Buttons panel
         JPanel searchPanel = new JPanel();
         searchPanel.setLayout(new BorderLayout());
 
         JPanel searchRow = new JPanel();
         searchRow.setLayout(new GridLayout());
 
-        lButton = logic.createLadiesButton();
+        //Gender buttons
+        lButton = logic.createGenderButton(Gender.FEMALE);
         searchRow.add(lButton);
 
-        mButton = logic.createManButton();
+        mButton = logic.createGenderButton(Gender.MALE);
         searchRow.add(mButton);
 
         searchPanel.add(searchRow,BorderLayout.PAGE_START);
@@ -49,6 +52,8 @@ public class MainFrame extends JFrame {
         searchRow = new JPanel();
         searchRow.setLayout(new GridLayout());
 
+        //Searching buttons
+        SearchButton button;
         button = logic.createSearchButton(RaceType.SL);
         searchRow.add(button);
 
