@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 
 public abstract class SearchButton extends JButton implements ActionListener {
 
-    SearchButton(String name){
+    public SearchButton(String name){
         super(name);
         setFont(new Font("Arial", Font.PLAIN, 20));
         setPreferredSize(new Dimension(350, 45));
