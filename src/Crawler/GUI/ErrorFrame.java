@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class ErrorFrame extends JFrame {
 
-    ErrorFrame(String message){
+    public ErrorFrame(String message){
         super("Error");
 
         setPreferredSize(new Dimension(600,300));

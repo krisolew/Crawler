@@ -1,5 +1,7 @@
 package Crawler.GUI;
 
+import Crawler.GUILogic.RaceType;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ItemEvent;
@@ -7,6 +9,7 @@ import java.awt.event.ItemListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -67,11 +70,11 @@ public class LeftPanel extends JPanel implements ItemListener {
         add(panel);
     }
 
-    void setAreaText(String text){
+    public void setAreaText(String text){
         area.setText(text);
     }
 
-    void replaceImage(String path){
+    public void replaceImage(String path){
         iPanel.replaceImage(path);
     }
 
@@ -87,7 +90,7 @@ public class LeftPanel extends JPanel implements ItemListener {
         resetSettings();
 
         Thread thread = new Thread( () -> frame.rightPanel.setTextContent(""));
-        frame.addThreadToExecutor(thread);
+        frame.logic.addThreadToExecutor(thread);
     }
 
     private int calculateCurrentYear(){
@@ -101,18 +104,17 @@ public class LeftPanel extends JPanel implements ItemListener {
     }
 
     private void setYear(String newYear){
-        String [] adresses = frame.getAdresses();
+        Map<RaceType, String> adresses = frame.logic.getAdresses();
         String oldYear;
         Pattern pattern = Pattern.compile("([^\\d])+(\\d\\d\\d\\d)([^\\d])+");
 
-        for (int i = 0; i < adresses.length; i++) {
-            Matcher matcher = pattern.matcher(adresses[i]);
+        for (Map.Entry<RaceType, String> adress : adresses.entrySet()) {
+            Matcher matcher = pattern.matcher(adress.getValue());
             if(matcher.find()) {
                 oldYear = matcher.group(2);
-                adresses[i] = adresses[i].replace(oldYear, newYear);
+                adresses.put(adress.getKey(), adress.getValue().replace(oldYear, newYear));
             }
         }
-        frame.setAdresses(adresses);
     }
 
     void resetSettings(){

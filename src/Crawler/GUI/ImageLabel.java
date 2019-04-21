@@ -1,5 +1,7 @@
 package Crawler.GUI;
 
+import Crawler.GUILogic.MainFrameLogic;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
@@ -28,7 +30,7 @@ public class ImageLabel extends JLabel {
         try {
             image = ImageIO.read(file);
         } catch (IOException ex) {
-            MainFrame.openErrorWindow("Picture not found");
+            MainFrameLogic.openErrorWindow("Picture not found");
         }
         repaint();
     }
