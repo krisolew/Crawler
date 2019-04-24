@@ -24,7 +24,7 @@ public class MainFrameLogic {
     private Map<RaceType, String> maleImages;
     private ExecutorService executor;
     private Future future = null;
-    private boolean man = true;
+    private Boolean man = null;
 
     public MainFrameLogic(MainFrame frame)
     {
@@ -47,7 +47,7 @@ public class MainFrameLogic {
 
         maleImages = new HashMap<>();
         maleImages.put(RaceType.ALL, "img/kula.jpg");
-        maleImages.put(RaceType.SL, "img/hirscher.jpg");
+        maleImages.put(RaceType.SL, "img/marcel.jpg");
         maleImages.put(RaceType.GS, "img/ligety.jpg");
         maleImages.put(RaceType.SG, "img/jansrud.jpg");
         maleImages.put(RaceType.DH, "img/bode.jpg");
@@ -82,6 +82,13 @@ public class MainFrameLogic {
 
             @Override
             public void actionPerformed(ActionEvent e) {
+                if (man == null)
+                {
+                    if (gender == Gender.FEMALE) man = true;
+                    else man = false;
+                }
+                else if ( (gender == Gender.MALE && man) || (gender == Gender.FEMALE && !man) ) return;
+
                 String target = gender.getAnotherGenderFirstLetter();
                 String replacement = gender.getFirstLetter();
 
