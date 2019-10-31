@@ -24,7 +24,7 @@ public class MainFrameLogic {
     private Map<RaceType, String> maleImages;
     private ExecutorService executor;
     private Future future = null;
-    private Boolean man = null;
+    private Boolean man = true;
 
     public MainFrameLogic(MainFrame frame)
     {
