@@ -21,7 +21,7 @@ public class MainFrame extends JFrame {
         setPreferredSize(new Dimension(1000,600));
         setResizable(false);
         setLocation(450,200);
-        ImageIcon icon = new ImageIcon("img/fis.png");
+        ImageIcon icon = new ImageIcon("src/main/resources/img/fis.png");
         setIconImage(icon.getImage());
 
         logic = new MainFrameLogic(this);

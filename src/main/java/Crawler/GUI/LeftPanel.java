@@ -23,7 +23,7 @@ public class LeftPanel extends JPanel {
 
         logic = new LeftPanelLogic(this);
 
-        iPanel = new ImageLabel("img/start.jpg");
+        iPanel = new ImageLabel("src/main/resources/img/start.jpg");
         add(iPanel);
 
         JPanel panel = new JPanel();
@@ -67,7 +67,7 @@ public class LeftPanel extends JPanel {
 
     public void resetSettings(){
         setAreaText("");
-        replaceImage("img/start.jpg");
+        replaceImage("src/main/resources/img/start.jpg");
     }
 
     public Object getComboBoxSelectedItem()

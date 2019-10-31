@@ -39,18 +39,18 @@ public class MainFrameLogic {
         adresses.put(RaceType.DH, "https://www.fis-ski.com/DB/alpine-skiing/cup-standings.html?sectorcode=AL&seasoncode=2019&cupcode=WC&disciplinecode=DH&gendercode=M");
 
         femaleImages = new HashMap<>();
-        femaleImages.put(RaceType.ALL, "img/podium.jpg");
-        femaleImages.put(RaceType.SL, "img/shiffrin.jpg");
-        femaleImages.put(RaceType.GS, "img/nina.jpg");
-        femaleImages.put(RaceType.SG, "img/ilka.jpg");
-        femaleImages.put(RaceType.DH, "img/vonn.jpg");
+        femaleImages.put(RaceType.ALL, "src/main/resources/img/podium.jpg");
+        femaleImages.put(RaceType.SL, "src/main/resources/img/shiffrin.jpg");
+        femaleImages.put(RaceType.GS, "src/main/resources/img/nina.jpg");
+        femaleImages.put(RaceType.SG, "src/main/resources/img/ilka.jpg");
+        femaleImages.put(RaceType.DH, "src/main/resources/img/vonn.jpg");
 
         maleImages = new HashMap<>();
-        maleImages.put(RaceType.ALL, "img/kula.jpg");
-        maleImages.put(RaceType.SL, "img/marcel.jpg");
-        maleImages.put(RaceType.GS, "img/ligety.jpg");
-        maleImages.put(RaceType.SG, "img/jansrud.jpg");
-        maleImages.put(RaceType.DH, "img/bode.jpg");
+        maleImages.put(RaceType.ALL,"src/main/resources/img/kula.jpg");
+        maleImages.put(RaceType.SL, "src/main/resources/img/marcel.jpg");
+        maleImages.put(RaceType.GS, "src/main/resources/img/ligety.jpg");
+        maleImages.put(RaceType.SG, "src/main/resources/img/jansrud.jpg");
+        maleImages.put(RaceType.DH, "src/main/resources/img/bode.jpg");
     }
 
     public Map<RaceType, String> getAdresses() {
