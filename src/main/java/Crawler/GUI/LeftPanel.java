@@ -1,5 +1,7 @@
 package Crawler.GUI;
 
+import Crawler.Colors;
+import Crawler.Fonts;
 import Crawler.GUILogic.LeftPanelLogic;
 
 import javax.swing.*;
@@ -18,8 +20,8 @@ public class LeftPanel extends JPanel {
         this.frame = frame;
         setPreferredSize(new Dimension(500,600));
         setLayout(new FlowLayout());
-        setFont(new Font("Arial", Font.PLAIN, 20));
-        setBackground(new Color(240, 240, 245));
+        setFont(Fonts.ARIAL_20);
+        setBackground(Colors.WHITE);
 
         logic = new LeftPanelLogic(this);
 
@@ -28,12 +30,12 @@ public class LeftPanel extends JPanel {
 
         JPanel panel = new JPanel();
         panel.setPreferredSize(new Dimension(500,255));
-        panel.setBackground(new Color(240, 240, 245));
+        panel.setBackground(Colors.WHITE);
         panel.setLayout(new FlowLayout());
 
         JLabel label = new JLabel();
         label.setText("Select season:");
-        label.setFont(new Font("Arial", Font.PLAIN, 20));
+        label.setFont(Fonts.ARIAL_20);
         label.setPreferredSize(new Dimension(350,30));
         label.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(label);
@@ -42,15 +44,15 @@ public class LeftPanel extends JPanel {
 
         comboBox = new JComboBox<>(years);
         comboBox.setPreferredSize(new Dimension(350,40));
-        comboBox.setFont(new Font("Arial", Font.PLAIN, 23));
+        comboBox.setFont(Fonts.ARIAL_23);
         comboBox.addItemListener(logic);
         comboBox.setMaximumRowCount(5);
         panel.add(comboBox);
 
         area = new JTextArea();
         area.setEditable(false);
-        area.setBackground(new Color(240, 240, 245));
-        area.setFont(new Font("Arial", Font.PLAIN, 17));
+        area.setBackground(Colors.WHITE);
+        area.setFont(Fonts.ARIAL_17);
         area.setPreferredSize(new Dimension(350,50));
         panel.add(area);
 

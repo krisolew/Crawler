@@ -1,5 +1,7 @@
 package Crawler.GUI;
 
+import Crawler.Colors;
+import Crawler.Fonts;
 import Crawler.GUILogic.RightPanelLogic;
 import Crawler.SkierData;
 
@@ -20,9 +22,9 @@ public class RightPanel extends JPanel{
         logic = new RightPanelLogic();
 
         text = new JTextArea();
-        text.setFont(new Font( "Arial", Font.PLAIN, 19));
+        text.setFont(Fonts.ARIAL_20);
         text.setTabSize(4);
-        text.setBackground(new Color(240, 240, 245));
+        text.setBackground(Colors.WHITE);
         text.setEditable(false);
 
         scroll = new JScrollPane(text,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);

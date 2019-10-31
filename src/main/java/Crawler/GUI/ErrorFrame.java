@@ -1,5 +1,8 @@
 package Crawler.GUI;
 
+import Crawler.Colors;
+import Crawler.Fonts;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -14,11 +17,11 @@ public class ErrorFrame extends JFrame {
         setResizable(false);
 
         JLabel text = new JLabel();
-        text.setFont(new Font("Arial",Font.PLAIN,30));
+        text.setFont(Fonts.ARIAL_30);
         text.setText(message);
         text.setHorizontalAlignment(SwingConstants.CENTER);
         text.setVerticalAlignment(SwingConstants.CENTER);
-        text.setForeground(new Color(255,0,0));
+        text.setForeground(Colors.RED);
         add(text);
 
         pack();

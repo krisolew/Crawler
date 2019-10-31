@@ -1,5 +1,6 @@
 package Crawler.GUI;
 
+import Crawler.Colors;
 import Crawler.Enums.Gender;
 import Crawler.GUILogic.MainFrameLogic;
 import Crawler.Enums.RaceType;
@@ -82,24 +83,24 @@ public class MainFrame extends JFrame {
 
     public void setGenderButtonOnClickProperties(JButton button, boolean man)
     {
-        button.setBackground(new Color(255, 215, 0));
-        button.setForeground(new Color(0));
+        button.setBackground(Colors.YELLOW);
+        button.setForeground(Colors.BLACK);
 
         if(man)
         {
-            lButton.setBackground(new Color(0,0,128));
-            lButton.setForeground(new Color(255,255,255));
+            lButton.setBackground(Colors.BLUE);
+            lButton.setForeground(Colors.WHITE);
         }
         else
         {
-            mButton.setBackground(new Color(0,0,128));
-            mButton.setForeground(new Color(255,255,255));
+            mButton.setBackground(Colors.BLUE);
+            mButton.setForeground(Colors.WHITE);
         }
     }
 
     public void setSpecialButtonSettings(SearchButton button)
     {
-        button.setBackground(new Color(255, 215, 0));
-        button.setForeground(new Color(0));
+        button.setBackground(Colors.YELLOW);
+        button.setForeground(Colors.BLACK);
     }
 }
