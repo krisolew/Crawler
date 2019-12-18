@@ -26,8 +26,7 @@ public class MainFrameLogic {
     private Future future = null;
     private Boolean man = true;
 
-    public MainFrameLogic(MainFrame frame)
-    {
+    public MainFrameLogic(MainFrame frame) {
         this.frame = frame;
         executor = Executors.newSingleThreadExecutor();
 
@@ -46,7 +45,7 @@ public class MainFrameLogic {
         femaleImages.put(RaceType.DH, "src/main/resources/img/vonn.jpg");
 
         maleImages = new HashMap<>();
-        maleImages.put(RaceType.ALL,"src/main/resources/img/kula.jpg");
+        maleImages.put(RaceType.ALL, "src/main/resources/img/kula.jpg");
         maleImages.put(RaceType.SL, "src/main/resources/img/marcel.jpg");
         maleImages.put(RaceType.GS, "src/main/resources/img/ligety.jpg");
         maleImages.put(RaceType.SG, "src/main/resources/img/jansrud.jpg");
@@ -63,65 +62,47 @@ public class MainFrameLogic {
         future = executor.submit(thread);
     }
 
-    public void addThreadToExecutor(Thread thread){
+    public void addThreadToExecutor(Thread thread) {
         executor.submit(thread);
     }
 
-    public static void openErrorWindow(String message){
-        EventQueue.invokeLater(new Thread( () -> new ErrorFrame(message)));
+    public static void openErrorWindow(String message) {
+        EventQueue.invokeLater(new Thread(() -> new ErrorFrame(message)));
     }
 
-    public SearchButton createGenderButton(Gender gender)
-    {
+    public SearchButton createGenderButton(Gender gender) {
         return new SearchButton(gender.toString()) {
             @Override
             public void specialSettings() {
                 if (gender == Gender.MALE)
-                frame.setSpecialButtonSettings(this);
+                    frame.setSpecialButtonSettings(this);
             }
 
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (man == null)
-                {
-                    if (gender == Gender.FEMALE) man = true;
-                    else man = false;
+                if (!(gender == Gender.MALE && man) && !(gender == Gender.FEMALE && !man)) {
+                    man = !man;
+
+                    String target = gender.getOppositeGenderFirstLetter();
+                    String replacement = gender.getFirstLetter();
+                    adresses.replaceAll((k, v) -> v.replace(target, replacement));
+                    frame.setGenderButtonOnClickProperties(this, man);
                 }
-                else if ( (gender == Gender.MALE && man) || (gender == Gender.FEMALE && !man) ) return;
-
-                String target = gender.getAnotherGenderFirstLetter();
-                String replacement = gender.getFirstLetter();
-
-                for (Map.Entry<RaceType, String> adress : adresses.entrySet()) {
-                    adresses.put(adress.getKey(), adress.getValue().replace(target,replacement) );
-                }
-
-                man = !man;
-                frame.setGenderButtonOnClickProperties(this, man);
                 frame.leftPanel.setAreaText(RaceType.ALL.toString());
-                if (man)
-                    frame.leftPanel.replaceImage(maleImages.get(RaceType.ALL));
-                else
-                    frame.leftPanel.replaceImage(femaleImages.get(RaceType.ALL));
+                frame.leftPanel.replaceImage(man ? maleImages.get(RaceType.ALL) : femaleImages.get(RaceType.ALL));
 
-                FisPageCrawler crawler = new FisPageCrawler(adresses.get(RaceType.ALL));
-                addCrawlerToExecutor(crawler);
+                addCrawlerToExecutor(new FisPageCrawler(adresses.get(RaceType.ALL)));
             }
         };
     }
 
-    public SearchButton createSearchButton(RaceType type)
-    {
+    public SearchButton createSearchButton(RaceType type) {
         return new SearchButton(type.toString()) {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.leftPanel.setAreaText(type.toString());
-                if (man)
-                    frame.leftPanel.replaceImage(maleImages.get(type));
-                else
-                    frame.leftPanel.replaceImage(femaleImages.get(type));
-                FisPageCrawler crawler = new FisPageCrawler(adresses.get(type));
-                addCrawlerToExecutor(crawler);
+                frame.leftPanel.replaceImage(man ? maleImages.get(type) : femaleImages.get(type));
+                addCrawlerToExecutor(new FisPageCrawler(adresses.get(type)));
             }
         };
     }

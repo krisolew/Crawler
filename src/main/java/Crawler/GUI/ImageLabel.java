@@ -14,7 +14,7 @@ public class ImageLabel extends JLabel {
     private BufferedImage image;
 
     ImageLabel(String path) {
-        setPreferredSize(new Dimension(500,300));
+        setPreferredSize(new Dimension(500, 300));
         replaceImage(path);
     }
 
@@ -24,7 +24,7 @@ public class ImageLabel extends JLabel {
         g2d.drawImage(image, 0, 0, this);
     }
 
-    void replaceImage(String path){
+    void replaceImage(String path) {
         File file = new File(path);
 
         try {

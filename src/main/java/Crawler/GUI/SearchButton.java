@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 
 public abstract class SearchButton extends JButton implements ActionListener {
 
-    public SearchButton(String name){
+    public SearchButton(String name) {
         super(name);
         setFont(Fonts.ARIAL_20);
         setPreferredSize(new Dimension(350, 45));
@@ -23,5 +23,6 @@ public abstract class SearchButton extends JButton implements ActionListener {
     @Override
     public abstract void actionPerformed(ActionEvent e);
 
-    public void specialSettings(){} //default implementation
+    public void specialSettings() {
+    } //default implementation
 }

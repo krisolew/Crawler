@@ -9,15 +9,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class RightPanel extends JPanel{
+public class RightPanel extends JPanel {
 
     private RightPanelLogic logic;
     private JTextArea text;
     private JScrollPane scroll;
 
-    RightPanel(){
+    RightPanel() {
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(494,600));
+        setPreferredSize(new Dimension(494, 600));
 
         logic = new RightPanelLogic();
 
@@ -27,15 +27,15 @@ public class RightPanel extends JPanel{
         text.setBackground(Colors.WHITE);
         text.setEditable(false);
 
-        scroll = new JScrollPane(text,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scroll = new JScrollPane(text, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         add(scroll);
     }
 
-    public void setTextContent(List <SkierData> skiers){
+    public void setTextContent(List<SkierData> skiers) {
         text.setText(logic.getContentFromList(skiers));
     }
 
-    public void setTextContent(String content){
+    public void setTextContent(String content) {
         scroll.updateUI();
         text.setText(content);
     }

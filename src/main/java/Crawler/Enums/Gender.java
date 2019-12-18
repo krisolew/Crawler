@@ -7,7 +7,7 @@ public enum Gender {
 
     @Override
     public String toString() {
-        switch(this){
+        switch (this) {
             case MALE:
                 return "Men";
             case FEMALE:
@@ -16,9 +16,8 @@ public enum Gender {
         return "";
     }
 
-    public String getFirstLetter()
-    {
-        switch (this){
+    public String getFirstLetter() {
+        switch (this) {
             case MALE:
                 return "M";
             case FEMALE:
@@ -27,9 +26,8 @@ public enum Gender {
         return "";
     }
 
-    public String getAnotherGenderFirstLetter()
-    {
-        switch (this){
+    public String getOppositeGenderFirstLetter() {
+        switch (this) {
             case MALE:
                 return "L";
             case FEMALE:

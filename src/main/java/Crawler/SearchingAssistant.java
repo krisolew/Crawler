@@ -13,7 +13,7 @@ public class SearchingAssistant implements Runnable {
     private MainFrame frame;
     private FisPageCrawler fisCrawler;
 
-    public SearchingAssistant(JFrame frame, FisPageCrawler fisCrawler){
+    public SearchingAssistant(JFrame frame, FisPageCrawler fisCrawler) {
         this.frame = (MainFrame) frame;
         this.fisCrawler = fisCrawler;
     }
@@ -29,15 +29,14 @@ public class SearchingAssistant implements Runnable {
             List<String> countries = fisCrawler.getCountries();
             List<SkierData> skiers = new LinkedList<>();
 
-            while(!names.isEmpty() && !points.get(0).equals("---")){
+            while (!names.isEmpty() && !points.get(0).equals("---")) {
                 String point = points.remove(0);
-                if (point.contains("'")) point = point.replace("'","");
-                skiers.add( new SkierData(names.remove(0), Integer.parseInt(point), countries.remove(0)));
+                if (point.contains("'")) point = point.replace("'", "");
+                skiers.add(new SkierData(names.remove(0), Integer.parseInt(point), countries.remove(0)));
             }
 
             frame.rightPanel.setTextContent(skiers);
-        }
-        catch (IOException ex){
+        } catch (IOException ex) {
             MainFrameLogic.openErrorWindow("No internet connection");
             frame.resetSettings();
         }

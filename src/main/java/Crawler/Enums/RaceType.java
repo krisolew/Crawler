@@ -9,7 +9,7 @@ public enum RaceType {
 
     @Override
     public String toString() {
-        switch (this){
+        switch (this) {
             case ALL:
                 return "Overall";
             case SL:

@@ -16,12 +16,11 @@ public class LeftPanelLogic implements ItemListener {
 
     private LeftPanel panel;
 
-    public LeftPanelLogic(LeftPanel panel)
-    {
+    public LeftPanelLogic(LeftPanel panel) {
         this.panel = panel;
     }
 
-    public String [] getYears() {
+    public String[] getYears() {
         Integer year = calculateCurrentYear();
         setYear(year.toString());
 
@@ -37,25 +36,25 @@ public class LeftPanelLogic implements ItemListener {
         return years;
     }
 
-    private void setYear(String newYear){
+    private void setYear(String newYear) {
         Map<RaceType, String> adresses = panel.getFrame().logic.getAdresses();
         String oldYear;
         Pattern pattern = Pattern.compile("([^\\d])+(\\d\\d\\d\\d)([^\\d])+");
 
         for (Map.Entry<RaceType, String> adress : adresses.entrySet()) {
             Matcher matcher = pattern.matcher(adress.getValue());
-            if(matcher.find()) {
+            if (matcher.find()) {
                 oldYear = matcher.group(2);
                 adresses.put(adress.getKey(), adress.getValue().replace(oldYear, newYear));
             }
         }
     }
 
-    private int calculateCurrentYear(){
+    private int calculateCurrentYear() {
         DateFormat yearFormat = new SimpleDateFormat("yyyy");
         DateFormat monthFormat = new SimpleDateFormat("MM");
         Date date = new Date();
-        int  year = Integer.parseInt(yearFormat.format(date));
+        int year = Integer.parseInt(yearFormat.format(date));
         int month = Integer.parseInt(monthFormat.format(date));
         if (month >= 10) year++;
         return year;
@@ -66,13 +65,13 @@ public class LeftPanelLogic implements ItemListener {
         Matcher yearMatcher = yearPattern.matcher(panel.getComboBoxSelectedItem().toString());
 
         String newYear = "";
-        if(yearMatcher.find())
+        if (yearMatcher.find())
             newYear = yearMatcher.group(2);
 
         setYear(newYear);
         panel.resetSettings();
 
-        Thread thread = new Thread( () -> panel.getFrame().rightPanel.setTextContent(""));
+        Thread thread = new Thread(() -> panel.getFrame().rightPanel.setTextContent(""));
         panel.getFrame().logic.addThreadToExecutor(thread);
     }
 }

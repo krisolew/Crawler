@@ -2,8 +2,8 @@ package Crawler.GUI;
 
 import Crawler.Colors;
 import Crawler.Enums.Gender;
-import Crawler.GUILogic.MainFrameLogic;
 import Crawler.Enums.RaceType;
+import Crawler.GUILogic.MainFrameLogic;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,12 +16,12 @@ public class MainFrame extends JFrame {
     private SearchButton lButton;
     private SearchButton mButton;
 
-    public MainFrame(){
+    public MainFrame() {
         super("Alpine Skiing Informator");
         setLayout(new BorderLayout());
-        setPreferredSize(new Dimension(1000,600));
+        setPreferredSize(new Dimension(1000, 600));
         setResizable(false);
-        setLocation(450,200);
+        setLocation(450, 200);
         ImageIcon icon = new ImageIcon("src/main/resources/img/fis.png");
         setIconImage(icon.getImage());
 
@@ -29,10 +29,10 @@ public class MainFrame extends JFrame {
 
         //display panels
         leftPanel = new LeftPanel(this);
-        add(leftPanel,BorderLayout.WEST);
+        add(leftPanel, BorderLayout.WEST);
 
         rightPanel = new RightPanel();
-        add(rightPanel,BorderLayout.EAST);
+        add(rightPanel, BorderLayout.EAST);
 
         //Buttons panel
         JPanel searchPanel = new JPanel();
@@ -48,7 +48,7 @@ public class MainFrame extends JFrame {
         mButton = logic.createGenderButton(Gender.MALE);
         searchRow.add(mButton);
 
-        searchPanel.add(searchRow,BorderLayout.PAGE_START);
+        searchPanel.add(searchRow, BorderLayout.PAGE_START);
 
         searchRow = new JPanel();
         searchRow.setLayout(new GridLayout());
@@ -68,38 +68,29 @@ public class MainFrame extends JFrame {
         searchRow.add(button);
         searchPanel.add(searchRow);
 
-        add(searchPanel,BorderLayout.PAGE_END);
+        add(searchPanel, BorderLayout.PAGE_END);
 
         pack();
         setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
-    public void resetSettings(){
+    public void resetSettings() {
 
         leftPanel.resetSettings();
         rightPanel.setTextContent("");
     }
 
-    public void setGenderButtonOnClickProperties(JButton button, boolean man)
-    {
+    public void setGenderButtonOnClickProperties(JButton button, boolean man) {
         button.setBackground(Colors.YELLOW);
         button.setForeground(Colors.BLACK);
 
-        if(man)
-        {
-            lButton.setBackground(Colors.BLUE);
-            lButton.setForeground(Colors.WHITE);
-        }
-        else
-        {
-            mButton.setBackground(Colors.BLUE);
-            mButton.setForeground(Colors.WHITE);
-        }
+        JButton buttonToDisable = man ? lButton : mButton;
+        buttonToDisable.setBackground(Colors.BLUE);
+        buttonToDisable.setForeground(Colors.WHITE);
     }
 
-    public void setSpecialButtonSettings(SearchButton button)
-    {
+    public void setSpecialButtonSettings(SearchButton button) {
         button.setBackground(Colors.YELLOW);
         button.setForeground(Colors.BLACK);
     }

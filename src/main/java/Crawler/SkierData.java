@@ -14,7 +14,7 @@ public class SkierData {
         this.country = country;
     }
 
-    public String toString(){
+    public String toString() {
         return RightPanelLogic.formatNumber(points) + "\t" + country + "\t" + name.trim() + "\n";
     }
 }

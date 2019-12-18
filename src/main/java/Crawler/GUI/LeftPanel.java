@@ -15,10 +15,10 @@ public class LeftPanel extends JPanel {
     private JTextArea area;
     private JComboBox<String> comboBox;
 
-    LeftPanel(MainFrame frame){
-    
+    LeftPanel(MainFrame frame) {
+
         this.frame = frame;
-        setPreferredSize(new Dimension(500,600));
+        setPreferredSize(new Dimension(500, 600));
         setLayout(new FlowLayout());
         setFont(Fonts.ARIAL_20);
         setBackground(Colors.WHITE);
@@ -29,21 +29,21 @@ public class LeftPanel extends JPanel {
         add(iPanel);
 
         JPanel panel = new JPanel();
-        panel.setPreferredSize(new Dimension(500,255));
+        panel.setPreferredSize(new Dimension(500, 255));
         panel.setBackground(Colors.WHITE);
         panel.setLayout(new FlowLayout());
 
         JLabel label = new JLabel();
         label.setText("Select season:");
         label.setFont(Fonts.ARIAL_20);
-        label.setPreferredSize(new Dimension(350,30));
+        label.setPreferredSize(new Dimension(350, 30));
         label.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(label);
 
-        String [] years = logic.getYears();
+        String[] years = logic.getYears();
 
         comboBox = new JComboBox<>(years);
-        comboBox.setPreferredSize(new Dimension(350,40));
+        comboBox.setPreferredSize(new Dimension(350, 40));
         comboBox.setFont(Fonts.ARIAL_23);
         comboBox.addItemListener(logic);
         comboBox.setMaximumRowCount(5);
@@ -53,32 +53,30 @@ public class LeftPanel extends JPanel {
         area.setEditable(false);
         area.setBackground(Colors.WHITE);
         area.setFont(Fonts.ARIAL_17);
-        area.setPreferredSize(new Dimension(350,50));
+        area.setPreferredSize(new Dimension(350, 50));
         panel.add(area);
 
         add(panel);
     }
 
-    public void setAreaText(String text){
+    public void setAreaText(String text) {
         area.setText(text);
     }
 
-    public void replaceImage(String path){
+    public void replaceImage(String path) {
         iPanel.replaceImage(path);
     }
 
-    public void resetSettings(){
+    public void resetSettings() {
         setAreaText("");
         replaceImage("src/main/resources/img/start.jpg");
     }
 
-    public Object getComboBoxSelectedItem()
-    {
+    public Object getComboBoxSelectedItem() {
         return comboBox.getSelectedItem();
     }
 
-    public MainFrame getFrame()
-    {
+    public MainFrame getFrame() {
         return frame;
     }
 }
